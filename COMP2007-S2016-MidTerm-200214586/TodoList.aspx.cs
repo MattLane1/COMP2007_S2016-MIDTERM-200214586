@@ -65,7 +65,32 @@ namespace COMP2007_S2016_MidTerm_200214586
             }
 
         }
-   
 
+        protected void ToDoGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            // Set the new page number
+            ToDoGridView.PageIndex = e.NewPageIndex;
+
+            // Refresh the grid
+            this.GetList();
+        }
+
+        protected void ToDoGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+
+        }
+
+        protected void ToDoGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+        }
+
+        protected void PageSizeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Set the new Page size
+            ToDoGridView.PageSize = Convert.ToInt32(PageSizeDropDownList.SelectedValue);
+
+            this.GetList();
+        }
     }
 }

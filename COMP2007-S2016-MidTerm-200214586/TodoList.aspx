@@ -10,7 +10,23 @@
 </div>
         </div>
                 <h4>To Do List</h4>
-                <asp:GridView runat="server" CssClass="table table-bordered table-striped table-hover" ID="ToDoGridView" DataKeyNames="TodoID" OnRowDeleting="ToDoGridView_RowDeleting" AutoGenerateColumns="false">
+
+              <div>
+                <label for="PageSizeDropDownList">Records per Page: </label>
+                <asp:DropDownList ID="PageSizeDropDownList" runat="server"
+                    AutoPostBack="true" CssClass="btn btn-default bt-sm dropdown-toggle"
+                    OnSelectedIndexChanged="PageSizeDropDownList_SelectedIndexChanged">
+                    <asp:ListItem Text="3" Value ="3" />
+                     <asp:ListItem Text="5" Value ="5" />
+                     <asp:ListItem Text="10" Value ="10" />
+                     <asp:ListItem Text="All" Value ="10000" />
+                </asp:DropDownList>
+            </div>
+
+                <asp:GridView runat="server" CssClass="table table-bordered table-striped table-hover" ID="ToDoGridView" DataKeyNames="TodoID" OnRowDeleting="ToDoGridView_RowDeleting"   
+                AutoGenerateColumns="false" AllowPaging="true" PageSize="3" 
+                OnPageIndexChanging="ToDoGridView_PageIndexChanging" AllowSorting="true" OnSorting="ToDoGridView_Sorting" 
+                OnRowDataBound="ToDoGridView_RowDataBound" PagerStyle-CssClass="pagination-ys">
                 <Columns>
                     <asp:BoundField runat="Server" DataField="TodoID" HeaderText="To do ID" Visible="true" />
                     <asp:BoundField runat="Server" DataField="TodoName" HeaderText="To do Name" Visible="true" />
