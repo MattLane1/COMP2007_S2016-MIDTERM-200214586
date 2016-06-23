@@ -1,19 +1,37 @@
-﻿using System;
+﻿//Using namespaces
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+//Usings needed for EF
 using COMP2007_S2016_MidTerm_200214586.Models;
 using System.Web.ModelBinding;
 using System.Linq.Dynamic;
+
+/**
+ * @author: Matthew Lane
+ * @date: June 20th, 2016
+ * @page: This page holds the gridview for the main list of todo's
+ */
 
 namespace COMP2007_S2016_MidTerm_200214586
 {
     public partial class TodoList : System.Web.UI.Page
     {
-
+        /**
+        * <summary>
+        * This method is called when the page is displayed, if it is the first time, it gets the users info
+        * If user info exists, then it populats the edit controls with it
+        * </summary>
+        * 
+        * @method Page_Load
+        * @param {object} sender
+        * @param {GridViewPageEventArgs} e
+        * @returns {void}
+        */
         protected void Page_Load(object sender, EventArgs e)
         {
             // if loading the page for the first time, populate the grid
@@ -24,6 +42,14 @@ namespace COMP2007_S2016_MidTerm_200214586
             }
         }
 
+        /**
+          * <summary>
+          * This method gets the information about the current, or selected, user
+          * </summary>
+          * 
+          * @method GetList
+          * @returns {void}
+          */
         protected void GetList()
         {
             // connect to EF
@@ -38,7 +64,16 @@ namespace COMP2007_S2016_MidTerm_200214586
             }
         }
 
-
+        /**
+        * <summary>
+        * This method is called when a user deletes a toDo item
+        * </summary>
+        * 
+        * @method SaveButton_Click
+        * @param {object} sender
+        * @param {GridViewPageEventArgs} e
+        * @returns {void}
+        */
         protected void ToDoGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             // store which row was clicked
