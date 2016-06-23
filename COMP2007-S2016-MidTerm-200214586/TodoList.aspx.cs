@@ -41,6 +41,28 @@ namespace COMP2007_S2016_MidTerm_200214586
 
         protected void ToDoGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            // store which row was clicked
+            int selectedRow = e.RowIndex;
+
+            // get the selected StudentID using the Grid's DataKey collection
+            int itemID = Convert.ToInt32(ToDoGridView.DataKeys[selectedRow].Values["TodoID"]);
+
+            using (TodoConnection db = new TodoConnection())
+            {
+                // create object of the Student class and store the query string inside of it
+                var deletedItem = (from allItems in db.Todos
+                                   where allItems.TodoID == itemID
+                                   select allItems).FirstOrDefault();
+
+                // remove the selected student from the db
+                db.Todos.Remove(deletedItem);
+
+                // save my changes back to the database
+                db.SaveChanges();
+
+                // refresh the grid
+                this.GetList();
+            }
 
         }
    
